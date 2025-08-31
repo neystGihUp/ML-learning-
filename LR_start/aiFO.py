@@ -10,17 +10,38 @@ np.random.seed(42)
 
 num_samples = 500  
 
-# данные
+# данные плюс формулы : 
+"""
+Базовая формула  : 
+    y=w⋅x+b
+    
+    x — признак (например, опыт работы в годах).
+
+    w — коэффициент наклона (slope, прибавка за 1 год).
+
+    b — смещение (intercept, стартовая зарплата).
+
+    y — предсказание (зарплата).
+
+"""
 years_of_experience = np.random.randint(2, 21, size=num_samples)
 intercept = 60_000 
 slope = (200_000 - intercept) / 18
 salaries = slope * years_of_experience + intercept + np.random.normal(0, 10_000, num_samples)
 
+"""
+    slope → это w.
+    intercept → это b.
+    years_of_experience → это x.
+    salaries → это y.   
+    
+"""
+
 # создаем DataFrame
 data = {'Years_of_experience': years_of_experience, 'Salary': salaries}
 df = pd.DataFrame(data)
 
-# график
+# график чтобы видеть 
 plt.figure(figsize=(10,6))
 sns.scatterplot(x='Years_of_experience', y='Salary', data=df, label="Data with noise")
 sns.regplot(x='Years_of_experience', y='Salary', data=df, scatter=False, color="red", label="Regression line")
